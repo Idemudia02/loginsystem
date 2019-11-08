@@ -75,7 +75,7 @@ def checkCredentials(allUsers):
 
 print()
 print("*" * 45)
-print(" R E G I S T E R   Y O U R   P R O D U C T ")
+print(" R E G I S T E R   Y O U R   A C C O U N T ")
 print("*" * 45)
 userDatabase = {}
 loop = True
