@@ -82,7 +82,7 @@ loop = True
 while loop:
     theAnwer = startDialog()
     if theAnwer == '1':
-        userInfo = updateUserInfo(userDatabase)
+        userinfo = updateUserInfo(userDatabase)
         if len(userinfo) !=  0:
            userDatabase.update(userinfo)        
     elif theAnwer == '2':
