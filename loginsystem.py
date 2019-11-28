@@ -1,6 +1,6 @@
 import getpass
 
-def startDialog():
+def start_dialog():
     print("")
     print("Hello! What do you want to do?")
     print("1. Update account")
@@ -9,10 +9,10 @@ def startDialog():
     print("4. Quit")
     return input()
 
-def get_new_user_info(allUsers):
+def get_new_user_info(all_users):
     this_user = {}
     user = input("User ID: ")
-    if user in allUsers:
+    if user in all_users:
         print("** You already have an account! **")
     else:
         match = False
@@ -28,35 +28,35 @@ def get_new_user_info(allUsers):
         this_user[user] = list
     return this_user
 
-def remove_user_info(allUsers):
-    this_user = check_credentials(allUsers)
-    if len(thisUser) != 0:
+def remove_user_info(all_users):
+    this_user = check_credentials(all_users)
+    if len(this_user) != 0:
         yes_no = input("Are you sure you want to close the account Y/n ?")
         if yes_no.upper() != 'Y':
-            thisUser = ""
-    return thisUser
+            this_user = ""
+    return this_user
             
-def update_User_Info(allUsers):
+def update_user_info(all_users):
     updated_info = {}
-    this_user = check_credentials(allUsers)
-    if len(thisUser) != 0:
+    this_user = check_credentials(all_users)
+    if len(this_user) != 0:
         print("1. Update first name")
         print("2. Update family name")
         print("3. Quit")
-        theAnswer = input()
-        userValue = allUsers[thisUser]
-        if theAnswer == '1':
+        the_answer = input()
+        user_value = all_users[this_user]
+        if the_answer == '1':
             user_value[1] = input("First name: ")
-        elif theAnswer == '2':
+        elif the_answer == '2':
             user_value[2] = input("Family name: ")
-        updated_info[thisUser] = userValue
+        updated_info[this_user] = user_value
     return updated_info        
                   
-def check_credentials(allUsers):
+def check_credentials(all_users):
     user = input("User ID: ")
-    if user in allUsers:
+    if user in all_users:
         pswd1 = getpass.getpass('Password:')
-        value =  allUsers[user]
+        value =  all_users[user]
         pswd2 = value[0]
         if pswd1 == pswd2:
             print("*" * 60)
@@ -78,21 +78,21 @@ print("*" * 45)
 user_database = {}
 loop = True
 while loop:
-    theAnwer = startDialog()
-    if theAnwer == '1':
+    the_answer = start_dialog()
+    if the_answer == '1':
         userinfo = update_user_info(user_database)
         if len(userinfo) !=  0:
            user_database.update(userinfo)        
-    elif theAnwer == '2':
+    elif the_answer == '2':
         userinfo = get_new_user_info(user_database)
         if len(userinfo) !=  0:
            user_database.update(userinfo)
-    elif theAnwer == '3':
-        userId = removeUserInfo(user_database)
+    elif the_answer == '3':
+        userId = remove_user_info(user_database)
         if len(userId) != 0:
             user_database.pop(userId)
             print(" Removing user account for " + userId)          
-    elif theAnwer == '4':
+    elif the_answer == '4':
         loop = False
         
 print()
