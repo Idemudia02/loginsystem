@@ -9,8 +9,8 @@ def startDialog():
     print("4. Quit")
     return input()
 
-def getNewUserInfo(allUsers):
-    thisUser = {}
+def get_new_user_info(allUsers):
+    this_user = {}
     user = input("User ID: ")
     if user in allUsers:
         print("** You already have an account! **")
@@ -25,20 +25,20 @@ def getNewUserInfo(allUsers):
         first = input("What is your first name?: ")
         last = input("What is your family name?: ")
         list = [pswd1, first, last]
-        thisUser[user] = list
-    return thisUser
+        this_user[user] = list
+    return this_user
 
-def removeUserInfo(allUsers):
-    thisUser = checkCredentials(allUsers)
+def remove_user_info(allUsers):
+    this_user = check_credentials(allUsers)
     if len(thisUser) != 0:
-        yesNo = input("Are you sure you want to close the account Y/n ?")
-        if yesNo.upper() != 'Y':
+        yes_no = input("Are you sure you want to close the account Y/n ?")
+        if yes_no.upper() != 'Y':
             thisUser = ""
     return thisUser
             
-def updateUserInfo(allUsers):
-    updatedInfo = {}
-    thisUser = checkCredentials(allUsers)
+def update_User_Info(allUsers):
+    updated_info = {}
+    this_user = check_credentials(allUsers)
     if len(thisUser) != 0:
         print("1. Update first name")
         print("2. Update family name")
@@ -46,13 +46,13 @@ def updateUserInfo(allUsers):
         theAnswer = input()
         userValue = allUsers[thisUser]
         if theAnswer == '1':
-            userValue[1] = input("First name: ")
+            user_value[1] = input("First name: ")
         elif theAnswer == '2':
-            userValue[2] = input("Family name: ")
-        updatedInfo[thisUser] = userValue
-    return updatedInfo        
+            user_value[2] = input("Family name: ")
+        updated_info[thisUser] = userValue
+    return updated_info        
                   
-def checkCredentials(allUsers):
+def check_credentials(allUsers):
     user = input("User ID: ")
     if user in allUsers:
         pswd1 = getpass.getpass('Password:')
@@ -71,28 +71,26 @@ def checkCredentials(allUsers):
         user = ""
     return user
     
-    
-
 print()
 print("*" * 45)
 print(" R E G I S T E R   Y O U R   A C C O U N T ")
 print("*" * 45)
-userDatabase = {}
+user_database = {}
 loop = True
 while loop:
     theAnwer = startDialog()
     if theAnwer == '1':
-        userinfo = updateUserInfo(userDatabase)
+        userinfo = update_user_info(user_database)
         if len(userinfo) !=  0:
-           userDatabase.update(userinfo)        
+           user_database.update(userinfo)        
     elif theAnwer == '2':
-        userinfo = getNewUserInfo(userDatabase)
+        userinfo = get_new_user_info(user_database)
         if len(userinfo) !=  0:
-           userDatabase.update(userinfo)
+           user_database.update(userinfo)
     elif theAnwer == '3':
-        userId = removeUserInfo(userDatabase)
+        userId = removeUserInfo(user_database)
         if len(userId) != 0:
-            userDatabase.pop(userId)
+            user_database.pop(userId)
             print(" Removing user account for " + userId)          
     elif theAnwer == '4':
         loop = False
@@ -100,5 +98,5 @@ while loop:
 print()
 print("tracing user data")
 print()
-for key,value in userDatabase.items():
+for key,value in user_database.items():
     print(key + " " + value[0] + " " + value[1] + " " + value[2] )
