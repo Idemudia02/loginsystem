@@ -1,4 +1,4 @@
-import getpass
+import getpass, users
 
 def start_dialog():
     print("")
@@ -6,7 +6,8 @@ def start_dialog():
     print("1. Update account")
     print("2. New user account")
     print("3. Close account")
-    print("4. Quit")
+    print("4. Reset system!!")
+    print("5. Quit")
     return input()
 
 def get_new_user_info(all_users):
@@ -75,28 +76,39 @@ print()
 print("*" * 45)
 print(" R E G I S T E R   Y O U R   A C C O U N T ")
 print("*" * 45)
-user_database = {}
+
+users.create_file()
+database = users.read_data()
 loop = True
 while loop:
     the_answer = start_dialog()
     if the_answer == '1':
-        userinfo = update_user_info(user_database)
+        userinfo = update_user_info(database)
         if len(userinfo) !=  0:
-           user_database.update(userinfo)        
+           database.update(userinfo)        
     elif the_answer == '2':
-        userinfo = get_new_user_info(user_database)
+        userinfo = get_new_user_info(database)
         if len(userinfo) !=  0:
-           user_database.update(userinfo)
+           database.update(userinfo)
     elif the_answer == '3':
-        userId = remove_user_info(user_database)
-        if len(userId) != 0:
-            user_database.pop(userId)
-            print(" Removing user account for " + userId)          
+        user_id = remove_user_info(database)
+        if len(user_id) != 0:
+            database.pop(user_id)
+            print(" Removing user account for " + user_id)
+            print("------------------->   ")
+            print(database)
     elif the_answer == '4':
+        users.delete_file()
+        database.clear()
+    elif the_answer == '5':
         loop = False
+
+users.write_data(database)
+        
         
 print()
 print("tracing user data")
 print()
-for key,value in user_database.items():
+dict = users.read_data()
+for key,value in dict.items():
     print(key + " " + value[0] + " " + value[1] + " " + value[2] )
