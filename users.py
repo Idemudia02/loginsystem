@@ -6,7 +6,6 @@ def read_data():
     the_file = open(USERFILE,'r')
     file_data = {}
     for line in the_file:
-        # Tupple with 4 words
         (key, v1, v2, v3) = line.split()
         file_data[key] = [v1, v2, v3]
     the_file.close()
@@ -14,18 +13,16 @@ def read_data():
 
 def write_data(data):
     the_file = open(USERFILE,'w')
-    # Get tupple (key, values)
     for key,values in data.items():
-        the_file.write(key + " ")    # space between words
+        the_file.write(key + " ")    
         the_file.write(values[0] + " ")
         the_file.write(values[1] + " ")
-        the_file.write(values[2] + "\n")    # newline between users
+        the_file.write(values[2] + "\n")    
     the_file.close()
 
 
     
-def create_file():
-    # make sure we have a file. Append so we can keep data if exists 
+def create_file(): 
     userInfoFile = open(USERFILE,'a') 
     userInfoFile.close()
     
@@ -35,4 +32,4 @@ def delete_file():
         print()
         print("*****   Removing " + USERFILE)
         os.remove(USERFILE)
-        create_file() # create a new empty file
+        create_file() 
